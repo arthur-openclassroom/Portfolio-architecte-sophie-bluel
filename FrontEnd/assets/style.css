@@ -291,6 +291,14 @@ footer nav ul {
 }
 
 /********************************************* Custom CSS *******************************************/
+html {
+	background-color: #FFFEF8;
+}
+
+a {
+	text-decoration: inherit;
+    color: inherit;
+}
 
 .filters {
 	display: flex;
@@ -316,3 +324,4 @@ footer nav ul {
 	background-color: #1D6154;
 	color:#FFFEF8;
 }
+
