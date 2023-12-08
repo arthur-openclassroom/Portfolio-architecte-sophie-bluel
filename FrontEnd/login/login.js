@@ -19,10 +19,10 @@ export function listenerLogin() {
         });
         const json_response = await response.json();
         console.log(json_response);
-        if (json_response.message === "user not found") {
+        if (json_response.error) {
             alert("Mauvais couple email/mot de passe.");
         }
-        else { 
+        else {
             sessionStorage.setItem("sophie-bluel-bearer", json_response.token);
             window.location.replace("/");
         }
