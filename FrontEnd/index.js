@@ -1,3 +1,9 @@
+const isLogged = sessionStorage.getItem("sophie-bluel-bearer");
+if(isLogged) {
+    alert("loguée")
+}
+
+
 // Récupération des travaux depuis le serveur
 const http_response_works = await fetch('http://localhost:5678/api/works');
 const works = await http_response_works.json();
