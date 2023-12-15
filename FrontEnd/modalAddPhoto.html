@@ -1,0 +1,25 @@
+<div class="icon-container">
+    <i class="fa-solid fa-arrow-left"></i>
+    <i class="fa-solid fa-xmark"></i>
+</div>
+<h2>Ajout photo</h2>
+<form class="add-photo-form-wrapper">
+    <div class="custom-file-upload">
+        <i class="fa-regular fa-image fa-10x"></i>
+        <label id="custom-label" for="upload-photo">+ Ajouter photo</label>
+        <input required="required" name="photo" type="file" id="upload-photo" accept="jpg, png">
+        <span>jpg, png : 4mo max</span>
+    </div>
+    <div class="label-container">
+        <label for="title">Titre</label>
+    </div>
+    <input required="required" id="input-title" type="text" name="title">
+    <div class="label-container">
+        <label for="category-id">Catégorie</label>
+    </div>
+    <select id="select-category" name="category-id">
+
+    </select>
+    <hr class="line">
+    <input class="btn-validate-photo" type="submit" value="Valider" disabled>
+</form>
