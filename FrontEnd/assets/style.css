@@ -282,6 +282,7 @@ input[type="submit"] {
 	width: 180px;
 	text-align: center;
 	border-radius: 60px;
+	cursor: pointer;
 }
 
 footer nav ul {
@@ -291,13 +292,19 @@ footer nav ul {
 }
 
 /********************************************* Custom CSS *******************************************/
-html {
+html body {
 	background-color: #FFFEF8;
+	margin: 0;
+}
+
+#main-container {
+	width: 90%;
+	margin: auto;
 }
 
 a {
 	text-decoration: inherit;
-    color: inherit;
+	color: inherit;
 }
 
 .filters {
@@ -320,8 +327,230 @@ a {
 	cursor: pointer;
 }
 
-.btn-filter[active], .btn-filter:hover {
+.btn-filter[active],
+.btn-filter:hover {
 	background-color: #1D6154;
-	color:#FFFEF8;
+	color: #FFFEF8;
 }
 
+.edit {
+	background-color: black;
+	color: #FFF;
+	text-align: center;
+	padding: 10px 0px 10px 0px;
+}
+
+.flexbox {
+	display: flex;
+	justify-content: center;
+}
+
+.flexbox .edit {
+	color: #000;
+	background-color: #FFFEF8;
+	margin-left: 20px;
+}
+
+.edit i {
+	margin-right: 5px;
+}
+
+.btn-edit-element {
+	cursor: pointer;
+}
+
+.modal {
+	position: fixed;
+	display: flex;
+	align-items: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+}
+
+.modal h2 {
+	color: #000;
+	text-align: center;
+	font-family: Work Sans;
+	font-size: 26px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+}
+
+.modal-wrapper {
+	overflow: auto;
+	display: flex;
+	flex-direction: column;
+	margin: auto;
+	background-color: #FFFEF8;
+	height: 500px;
+	width: 450px;
+	padding: 60px 80px;
+}
+
+.modal-wrapper .fa-xmark {
+	cursor: pointer;
+	margin-left: auto;
+	height: 20px;
+	width: 20px;
+	font-size: 20px;
+	color: #000;
+}
+
+.modal-wrapper button {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin: auto;
+	text-align: center;
+	border-radius: 60px;
+	height: 36px;
+	padding: 10px 40px;
+}
+
+.modal-wrapper h2 {
+	margin-bottom: 30px;
+}
+
+.modal-wrapper .line {
+	margin-top: 40px;
+	margin-bottom: 40px;
+
+	width: 420px;
+	border: solid 1px #B3B3B3;
+}
+
+.modal-wrapper img {
+	width: 100%;
+}
+
+.modal-wrapper figure {
+	position: relative;
+	height: 105px;
+	width: 78px;
+}
+
+.modal-wrapper .gallery-modal {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	column-gap: 10px;
+	row-gap: 30px;
+}
+
+.modal-wrapper .work-trash {
+	cursor: pointer;
+	background-color: black;
+	width: 17px;
+	height: 17px;
+	border-radius: 2px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 3px;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+
+.modal-wrapper .fa-trash-can {
+	color: #FFF;
+}
+
+.add-photo-form-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.fa-image {
+	color: #B9C5CC;
+}
+
+.custom-file-upload {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: #E8F1F6;
+	color: #444444
+}
+
+
+.add-photo-form-wrapper #custom-label {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	border-radius: 50px;
+	background-color: #CBD6DC;
+	height: 26px;
+	font-size: 15px;
+	text-align: center;
+	padding: 5px 15px;
+	width: 150px;
+	color: #306685;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.add-photo-form-wrapper #upload-photo {
+	opacity: 0;
+	position: absolute;
+	z-index: -1;
+}
+
+.add-photo-form-wrapper input,
+.add-photo-form-wrapper select {
+	box-sizing: border-box;
+	margin-top: 20px;
+	height: 50px;
+	width: 100%;
+	border: none;
+	padding-left: 15px;
+	padding-right: 15px;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+.add-photo-form-wrapper select {
+	border-right: solid 15px transparent;
+}
+
+.btn-validate-photo {
+	width: 80% !important;
+}
+
+.btn-add-photo {
+	border: 0;
+	cursor: pointer;
+}
+
+input[type="submit"]:disabled {
+	background-color: #A7A7A7;
+	cursor: not-allowed;
+}
+
+.label-container {
+	margin-top: 15px;
+	width: 100%;
+}
+
+.icon-container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.icon-container i {
+	cursor: pointer;
+}
+
+.custom-file-upload img {
+	height: 300px;
+	width: 300px;
+}

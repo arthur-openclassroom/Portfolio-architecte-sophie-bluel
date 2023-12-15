@@ -18,8 +18,7 @@ export function listenerLogin() {
             body: payload
         });
         const json_response = await response.json();
-        console.log(json_response);
-        if (json_response.error) {
+        if (json_response.error || json_response.message === "user not found") {
             alert("Mauvais couple email/mot de passe.");
         }
         else {
