@@ -1,10 +1,16 @@
-/** This function get works from API and return them as a json object. */
+/**
+ * This function get works from API and return them as a json object.
+ * @returns {http_response_works.json()}
+ */
 async function getWorks() {
     const http_response_works = await fetch('http://localhost:5678/api/works');
     return await http_response_works.json();
 }
 
-/** This function get categories from API and return them as a json object. */
+/**
+ * This function get categories from API and return them as a json object.
+ * @returns {http_response_categories.json()}
+ */
 async function getCategories() {
     const http_response_categories = await fetch('http://localhost:5678/api/categories');
     return await http_response_categories.json();
@@ -46,7 +52,10 @@ if (isLogged) {
     });
 }
 
-/** This function generate the filters buttons on the page */
+/**
+ * This function generate the filters buttons on the page
+ * @param {*} categories 
+ */
 function generateDynamicFilters(categories) {
     const galleryElement = document.querySelector(".gallery");
     for (const categorie of categories) {
@@ -75,7 +84,9 @@ function generateDynamicFilters(categories) {
     });
 }
 
-/** This function remove the "active" state of every filters buttons*/
+/**
+ * This function remove the "active" state of every filters buttons
+ */
 function cleanActiveButton() {
     const divPortfolio = document.querySelector(".filters");
     for (let button of divPortfolio.children) {
@@ -88,9 +99,12 @@ const focusableSelector = 'button, a, input, select, textarea'
 let focusables = []
 let previouslyFocusedElement = null
 
-/** This function open the first modal */
-async function openModal(e) {
-    e.preventDefault();
+/**
+ * This function open the first modal 
+ * @param {*} event 
+ */
+async function openModal(event) {
+    event.preventDefault();
     modal = document.querySelector(".modal");
     let modalPage = modal.querySelector("#main-modal");
     focusables = Array.from(modalPage.querySelectorAll(focusableSelector));
@@ -103,22 +117,25 @@ async function openModal(e) {
     await refreshDynamicModalGallery();
     modal.querySelector('.fa-xmark').addEventListener('click', closeModal);
     modal.querySelector('.btn-add-photo').addEventListener('click', await openPhotoModal);
-    modal.addEventListener('keydown', function (e) {
-        if (e.key === "Escape" || e.key === "Esc") {
-            closeModal(e);
+    modal.addEventListener('keydown', function (event) {
+        if (event.key === "Escape" || event.key === "Esc") {
+            closeModal(event);
         }
-        if (e.key === "Tab" && modal !== null) {
-            focusInModal(e);
+        if (event.key === "Tab" && modal !== null) {
+            focusInModal(event);
         }
     });
 }
 
-/** This function close the first modal */
-const closeModal = function (e) {
+/**
+ * This function close the first modal
+ * @param {*} event 
+ */
+const closeModal = function (event) {
     modal = document.querySelector(".modal");
     if (modal === null) return;
     if (previouslyFocusedElement !== null) previouslyFocusedElement.focus();
-    e.preventDefault();
+    event.preventDefault();
     modal.style.display = "none";
     modal.setAttribute('aria-hidden', 'true');
     modal.removeAttribute('aria-modal');
@@ -127,9 +144,12 @@ const closeModal = function (e) {
     modal = null;
 }
 
-/** This function manage the focus inside the modals */
-const focusInModal = function (e) {
-    e.preventDefault()
+/**
+ * This function manage the focus inside the modals
+ * @param {*} event 
+ */
+const focusInModal = function (event) {
+    event.preventDefault()
     console.log(focusables);
     let index = focusables.findIndex(f => f === modal.querySelector(':focus'));
     if (e.shiftKey === true) {
@@ -148,7 +168,11 @@ const focusInModal = function (e) {
     focusables[index].focus()
 }
 
-/** This function get the works from API and append data in the Gallery */
+/**
+ * This function get the works from API and append data in the Gallery
+ * @param {*} works 
+ * @param {*} parent 
+ */
 function generateDynamicGallery(works, parent) {
     for (const work of works) {
         const figureElement = document.createElement("figure");
@@ -164,7 +188,9 @@ function generateDynamicGallery(works, parent) {
     }
 }
 
-/** This function refresh the works data in Gallery and Modal Gallery */
+/**
+ * This function refresh the works data in Gallery and Modal Gallery
+ */
 async function refreshWork() {
     const divModalGallery = document.querySelector(".gallery-modal");
     const divGallery = document.querySelector(".gallery");
@@ -177,21 +203,29 @@ async function refreshWork() {
     generateDynamicGallery(works, divGallery);
 }
 
-/** This function refresh the works data only in Gallery */
+/**
+ * This function refresh the works data only in Gallery
+ */
 async function refreshDynamicGallery() {
     const divGallery = document.querySelector(".gallery");
     divGallery.innerHTML = "";
     generateDynamicGallery(await getWorks(), divGallery);
 }
 
-/** This function refresh the works data only in Modal Gallery */
+/**
+ * This function refresh the works data only in Modal Gallery
+ */
 async function refreshDynamicModalGallery() {
     const divModalGallery = document.querySelector(".gallery-modal");
     divModalGallery.innerHTML = "";
     generateDynamicGalleryModal(await getWorks(), divModalGallery);
 }
 
-/** This function get the works from API and append data in the Modal Gallery */
+/**
+ * This function get the works from API and append data in the Modal Gallery
+ * @param {*} works 
+ * @param {*} parent 
+ */
 async function generateDynamicGalleryModal(works, parent) {
     for (const work of works) {
         const figureElement = document.createElement("figure");
@@ -220,7 +254,9 @@ async function generateDynamicGalleryModal(works, parent) {
 }
 
 
-/** This function open the second modal */
+/**
+ * This function open the second moda
+ */
 async function openPhotoModal() {
     modal.removeEventListener("click", closeModal);
     let modalPage = modal.querySelector("#add-photo-modal");
@@ -234,9 +270,11 @@ async function openPhotoModal() {
 
     const imgInpElement = document.querySelector("#upload-photo");
     const titleInputElement = document.querySelector("#input-title");
+    const selectElement = document.querySelector("#select-category");
 
     let checkFile = imgInpElement.files ? true : false;
     let checkTitle = titleInputElement.value ? true : false;
+    let checkCategory = selectElement.value ? true : false;
 
     modalPage.querySelector('.fa-xmark').addEventListener('click', function goBack(e) {
         closeAddPhotoModal();
@@ -252,7 +290,7 @@ async function openPhotoModal() {
         const [file] = imgInpElement.files;
         if (file) {
             checkFile = true;
-            if (checkFile && checkTitle) {
+            if (checkFile && checkTitle && checkCategory) {
                 enableValidateButton();
             }
             else {
@@ -271,7 +309,7 @@ async function openPhotoModal() {
 
     titleInputElement.addEventListener("change", function changeInput(e) {
         checkTitle = titleInputElement.value ? true : false;
-        if (checkFile && checkTitle) {
+        if (checkFile && checkTitle && checkCategory) {
             enableValidateButton();
         }
         else {
@@ -279,12 +317,23 @@ async function openPhotoModal() {
         }
     });
 
-    const selectElement = document.querySelector("#select-category");
+    selectElement.addEventListener("change", function changeInput(e) {
+        checkCategory = selectElement.value ? true : false;
+        if (checkFile && checkTitle && checkCategory) {
+            enableValidateButton();
+        }
+        else {
+            disableValidateButton();
+        }
+    });
+
     appendCategoriesToSelect(selectElement);
     createWork();
 }
 
-/** This function close the second modal */
+/**
+ * This function close the second modal
+ */
 function closeAddPhotoModal() {
     let checkFile = false;
     let checkTitle = false;
@@ -292,15 +341,20 @@ function closeAddPhotoModal() {
     document.querySelector("#add-photo-modal").style.display = "none";
 }
 
-/** This function reset the second modal */
+/** 
+ * This function reset the second modal 
+ */
 async function refreshModalAddPhoto() {
     const content = await fetch("./modalAddPhoto.html");
     return await content.text();
 }
 
-/** This function populate the options of the select in the second modal with all the categories */
+/**
+ * This function populate the options of the select in the second modal with all the categories
+ * @param {*} selectElement 
+ */
 async function appendCategoriesToSelect(selectElement) {
-    selectElement.innerHTML = "";
+    selectElement.innerHTML = "<option selected disabled value=''></option>";
     const categories = await getCategories();
     for (const categorie of categories) {
         const optionElement = document.createElement("option");
@@ -310,16 +364,22 @@ async function appendCategoriesToSelect(selectElement) {
     }
 }
 
-/** This function enable the validate button in the second modal's form */
+/**
+ * This function enable the validate button in the second modal's form
+ */
 function enableValidateButton() {
     document.querySelector(".btn-validate-photo").removeAttribute("disabled");
 }
-/** This function disable the validate button in the second modal's form */
+/**
+ * This function disable the validate button in the second modal's form
+ */
 function disableValidateButton() {
     document.querySelector(".btn-validate-photo").setAttribute("disabled", "disabled");
 }
 
-/** This function add the listener to send a new work to the backend with API */
+/**
+ * This function add the listener to send a new work to the backend with API
+ */
 function createWork() {
     const bearerToken = sessionStorage.getItem("sophie-bluel-bearer");
     const photoForm = document.querySelector(".add-photo-form-wrapper");
