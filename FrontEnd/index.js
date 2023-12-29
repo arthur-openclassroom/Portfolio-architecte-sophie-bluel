@@ -27,6 +27,8 @@ generateDynamicFilters(categories);
 const isLogged = sessionStorage.getItem("sophie-bluel-bearer");
 
 if (isLogged) {
+    const filtersElement = document.querySelector(".filters");
+    filtersElement.style.display = "none";
     const divEdits = document.querySelectorAll(".edit");
     divEdits[0].style.display = "block";
 
@@ -247,7 +249,12 @@ async function generateDynamicGalleryModal(works, parent) {
                     method: "DELETE",
                     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${bearerToken}` }
                 });
-                await refreshWork();
+                if(response.status === 204) {
+                    await refreshWork();
+                }
+                else {
+                    alert("Erreur lors de la suppression, veuillez réessayer")
+                }
             }
         });
     }
